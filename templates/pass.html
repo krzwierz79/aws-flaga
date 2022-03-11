@@ -51,6 +51,14 @@
                                 <h1>generate your password</h1>
                                     
                                     {% if name %}
+                                        <form method="POST">
+                                            {{form.hidden_tag()}}
+                                    
+                                            {{form.name.label(class="form-label")}}
+                                            {{form.name}}
+                                        
+                                            {{form.submit(class="btn btn-primary btn-lg btn-learn")}}
+                                        </form>    
                                         <h2>{{password}}</h2>
                                     {% else %}
                                         <form method="POST">
