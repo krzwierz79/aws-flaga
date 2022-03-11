@@ -1,0 +1,4 @@
+**__pycache__/
+flagaenv/
+*.sock
+.DS_Store
