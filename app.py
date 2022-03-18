@@ -1,10 +1,12 @@
 import random
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from programs.passgen import passgen
 from programs.wiki_search import wiki_search
+from programs.friends_game import read_riddle
+from programs.ffriends import read_ffriend
 
 # app instance
 app=Flask(__name__)
@@ -26,11 +28,38 @@ def index():
 def xd():
     return render_template("xd.html")
 
+@app.route('/draft-dla-ukrainy', methods=['GET', 'POST'])
+def draft():    
+    # answer = None
+    show = None
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'Do Something':
+            pass # do something
+        elif request.form['submit_button'] == 'Do Something Else':
+            pass # do something else
+        else:
+            pass # unknown
+    elif request.method == 'GET':
+        entry, mean_1, mean_2, answer = read_riddle()
+        return render_template("ukr-draft.html",
+        entry = entry,
+        mean_1 = mean_1, 
+        mean_2 = mean_2,
+        answer = answer,
+        show = show)
+
+
 @app.route('/flaga-dla-ukrainy')
 def ukr():
     ukrainian = random.choice(['Ukrainian Falcons', 'Ukrainian Levkoy', 'Ukrainian alphabet'])
     from_wiki = wiki_search(ukrainian).encode('utf-8').decode()
-    return render_template("ukr.html", to_page = from_wiki)
+    pl_word, ua_word, pl_mean, ua_mean = read_ffriend('/var/www/flaga/dane/ffriends_pl_ua.csv')
+    return render_template("ukr.html", 
+    to_page = from_wiki,
+    pl_word = pl_word, 
+    ua_word = ua_word, 
+    pl_mean = pl_mean, 
+    ua_mean = ua_mean)
 
 @app.route('/password', methods=['GET', 'POST'])
 def password():
