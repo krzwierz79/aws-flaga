@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+    <script type=text/javascript>
+        $(document).ready(function(){
+            $("p#yes_result").hide();
+            $("p#no_result").hide();
+            $(document).on('submit','#show_result',function(e){
+            e.preventDefault();})
+            
+            $("#btn_yes").click(function(){
+            $("p#yes_result").show();
+            $("p#no_result").hide();
+            });
+
+            $("#btn_no").click(function(){
+            $("p#yes_result").hide();
+            $("p#no_result").show();
+            });
+        });
+
+    </script>
+
+        <div id="fh5co-wireframe">
+            <div class="container">
+
+                <p>z csv pobieram losowy wiersz zawierający słowo, które po polsku i ukraińsku brzmi podobnie - tylko że czasami to podobieństwo jest mylące. <br />
+                    np. (słowo: {{entry}},znaczenie pl: {{mean_1}}, znaczenie ua: {{mean_2}}, zanaczenia są: {{answer}}) </p>
+
+                <h3>
+                    <p><br />Czy "{{entry}}" ma podobne znaczenie po polsku i ukraińsku?</p>
+                    <form id="show_result">
+                        
+                        <input class="btn btn-primary btn-lg btn-demo" type="submit" value="tak" id="btn_yes" />
+                        <input class="btn btn-primary btn-lg btn-demo" type="submit" value="nie" id="btn_no" />
+                    </form> 
+                        <br />    
+                        <p id=yes_result>
+                            {% if answer == "podobne" %}
+                            Tak "{{entry}}" ma podobne znaczenie w obu językach.
+                            {% else %}
+                            Nie. Osoba z Ukrainy może zrozumieć "{{entry}}" jako "{{mean_2}}", a nie "{{mean_1}}."
+                            {% endif %}
+                        </p>
+                        <p id=no_result>
+                            {% if answer == "inne" %}
+                            Masz rację. Osoba z Ukrainy może zrozumieć "{{entry}}" jako "{{mean_2}}", a nie "{{mean_1}}."
+                            {% else %}:
+                            A jednak! "{{entry}}" ma podobne znaczenie w obu językach.
+                            {% endif %}
+                            <br />
+                        </p>
+                        
+                        <br />
+                        <form id="next_word">
+                            <input class="btn btn-primary btn-lg btn-demo" type="submit" value="inne słowo" id="next" />
+                        </form>
+                </h3>
+            </div>
+        </div>
+
+{% endblock %}

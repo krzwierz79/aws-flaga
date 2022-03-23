@@ -1,4 +1,4 @@
-import random
+import random, csv
 from flask import Flask, render_template, request, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -27,6 +27,13 @@ def index():
 @app.route('/xd')
 def xd():
     return render_template("xd.html")
+
+@app.route('/terminal')
+def terminal():
+    with open('dane/terminal.csv', newline='\n') as csvfile:
+        shortcuts = list(csv.reader(csvfile, delimiter=';'))#.encode('utf-8').decode()
+    return render_template("terminal.html", 
+    shortcuts = shortcuts)
 
 @app.route('/draft-dla-ukrainy', methods=['GET', 'POST'])
 def draft():    

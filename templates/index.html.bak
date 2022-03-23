@@ -40,7 +40,6 @@
     
     <body>
         <div class="fh5co-loader"></div>
-        <div id="page">
         <nav class="fh5co-nav" role="navigation">
             <div class="top-menu">
                 <div class="container">
@@ -52,20 +51,19 @@
                             <ul>
                                 <li class="active"><a href="/">Home</a></li>
                                 <li><a href="/flaga-dla-ukrainy">flaga dla Ukrainy</a></li>
-                                <li><a href="/draft-dla-ukrainy">WIP</a></li>
+                                <li><a href="/draft-dla-ukrainy">zgadywanka</a></li>
                                 <li class="has-dropdown">
                                     <a href="#">zajęcia</a>
                                     <ul class="dropdown">
-                                        <li><a href="/terminal">podstawy terminala</a></li>
-                                        <li><a href="/password">password generator</a></li>
+                                        <li><a href="#">006</a></li>
                                         <li><a href="#">009</a></li>
                                         <li><a href="#">014</a></li>
                                         <li><a href="#">github</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="https://krzysiekwie.github.io">About</a></li>
-                                <li><a href="http://kod.pisz.pl">Oracle flag</a></li>
-                                <!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
+                                <!-- <li><a href="contact.html">Contact</a></li>
+                                <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -74,11 +72,28 @@
             </div>
         </nav>
 
-        {% block body %}{% endblock %}
-  
-        <p class="text-right">made with free html5 templates by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></p>
-      </div>
 
+
+        <div id="page">
+            <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <div class="display-t js-fullheight">
+                                <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+                                    <h1>XD</h1>
+                                    <h2>made with free html5 templates by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
+                                    <p>
+                                        <a class="btn btn-primary btn-lg btn-demo" href="https://krzysiekwie.github.io"></i> github </a>
+                                        <a class="btn btn-primary btn-lg btn-learn" href="https://zajecia-programowania-xd.pl/"> {{text}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
     <!-- jQuery -->
     <script src="../static/js/jquery.min.js"></script>
     
@@ -101,5 +116,3 @@
     </body>
 
 </html>
-
-     

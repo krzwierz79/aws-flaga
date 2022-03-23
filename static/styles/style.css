@@ -564,7 +564,8 @@ figure {
 
 .user-frame {
     width: 90%;
-    padding: 3em;
+    /* padding: 3em; */
+    margin-bottom: 3em;
     -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.13);
     -moz-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.13);
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.13);

@@ -1,0 +1,11 @@
+Tab;zacznij pisać i wciśnij tab: dokończy za ciebie nazwę pliku lub folderu, wciśnięty 2 razy pokaże wszystkie możliwe nazwy zaczynające się od wpisanych liter
+Ctrl-C;zabija (kill) proces działający w terminalu
+Ctrl-A;przesuwa kursor na początek linii
+Ctrl-E;przesuwa kursor na początek linii
+Ctrl-kursory (lewy/prawy);przesuwają kursor o słowo
+kursory (góra/ dół);wyświetlają polecenia z historii (wykonane wcześniej)
+Ctrl-R;włącza wyszukiwanie w historii poleceń
+Ctrl-U;usuwa część linii na lewo od kursora
+Ctrl-K;usuwa część linii na prawo od kursora
+Ctrl-W (albo Alt-Backspace);usuwa po słowie od końca linii
+!!;ponawia ostatnie polecenie
