@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #answer {
+            width: 100%;
+            padding: 50px 0;
+            text-align: center;
+            background-color: lightblue;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>{{question}}</h2>
+
+    <button onclick="myFunction()">Show answer</button>
+
+    <div id="answer">
+        {{answer}}
+    </div>
+
+    <!-- <p><b>Note:</b> The element will not take up any space when the display property set to "none".</p> -->
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("answer");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
