@@ -1,4 +1,5 @@
-import random, csv
+import random
+import csv
 from flask import Flask, render_template, request, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -9,64 +10,83 @@ from programs.friends_game import read_riddle
 from programs.ffriends import read_ffriend
 
 # app instance
-app=Flask(__name__)
+app = Flask(__name__)
 
 # secret for flask_wtf
 app.config['SECRET_KEY'] = "soooo secret"
 
 # form class
+
+
 class InputForm(FlaskForm):
     name = StringField("How many chars?", validators=[DataRequired()])
     submit = SubmitField("Generate")
+
 
 @app.route('/')
 def index():
     text = open('dane/xd.txt').read()
     return render_template("index.html", text=text)
 
-@app.route('/xd')
+
+@app.route('/xd', methods=["GET"])
 def xd():
-    return render_template("xd.html")
+    # ip = jsonify({'ip': request.remote_addr}), 200
+    ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
+    return render_template("xd.html", ip=ip)
+
+
+@app.route('/pykr')
+def pykr():
+    question = "Co musi wiedzieć Junior?"
+    answer = "Gdzie siedzi najbliższy Senior"
+    return render_template("pykr.html", question=question, answer=answer)
+
 
 @app.route('/terminal')
 def terminal():
     with open('dane/terminal.csv', newline='\n') as csvfile:
-        shortcuts = list(csv.reader(csvfile, delimiter=';'))#.encode('utf-8').decode()
-    return render_template("terminal.html", 
-    shortcuts = shortcuts)
+        shortcuts = list(csv.reader(csvfile, delimiter=';')
+                         )  # .encode('utf-8').decode()
+    return render_template("terminal.html",
+                           shortcuts=shortcuts)
+
 
 @app.route('/draft-dla-ukrainy', methods=['GET', 'POST'])
-def draft():    
+def draft():
     # answer = None
     show = None
     if request.method == 'POST':
         if request.form['submit_button'] == 'Do Something':
-            pass # do something
+            pass  # do something
         elif request.form['submit_button'] == 'Do Something Else':
-            pass # do something else
+            pass  # do something else
         else:
-            pass # unknown
+            pass  # unknown
     elif request.method == 'GET':
         entry, mean_1, mean_2, answer = read_riddle()
         return render_template("ukr-draft.html",
-        entry = entry,
-        mean_1 = mean_1, 
-        mean_2 = mean_2,
-        answer = answer,
-        show = show)
+                               entry=entry,
+                               mean_1=mean_1,
+                               mean_2=mean_2,
+                               answer=answer,
+                               show=show)
 
 
 @app.route('/flaga-dla-ukrainy')
 def ukr():
-    ukrainian = random.choice(['Ukrainian Falcons', 'Ukrainian Levkoy', 'Ukrainian alphabet'])
+    ukrainian = random.choice(
+        ['Ukrainian Falcons', 'Ukrainian Levkoy', 'Ukrainian alphabet'])
     from_wiki = wiki_search(ukrainian).encode('utf-8').decode()
-    pl_word, ua_word, pl_mean, ua_mean = read_ffriend('/var/www/flaga/dane/ffriends_pl_ua.csv')
-    return render_template("ukr.html", 
-    to_page = from_wiki,
-    pl_word = pl_word, 
-    ua_word = ua_word, 
-    pl_mean = pl_mean, 
-    ua_mean = ua_mean)
+    pl_word, ua_word, pl_mean, ua_mean = read_ffriend(
+        '/var/www/flaga/dane/ffriends_pl_ua.csv')
+    return render_template("ukr.html",
+                           to_page=from_wiki,
+                           pl_word=pl_word,
+                           ua_word=ua_word,
+                           pl_mean=pl_mean,
+                           ua_mean=ua_mean)
+
 
 @app.route('/password', methods=['GET', 'POST'])
 def password():
@@ -75,13 +95,14 @@ def password():
     form = InputForm()
     if form.validate_on_submit():
         name = int(form.name.data)
-        ready_pass = passgen(name) # ???(name).encode('utf-8').decode()
+        ready_pass = passgen(name)  # ???(name).encode('utf-8').decode()
         form.name.data = ''
 
-    return render_template("pass.html", 
-        password=ready_pass,
-        name = name,
-        form = form)
+    return render_template("pass.html",
+                           password=ready_pass,
+                           name=name,
+                           form=form)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     app.run()
